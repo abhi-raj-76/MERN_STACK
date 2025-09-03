@@ -7,6 +7,11 @@ const workoutRoutes = require('./Routes/workouts')
 // express app
 const app = express()
 
+// Middleware
+// Handle a POST or PATCH request we can't access
+// the data from 'req' object we use middleware express.json()
+app.use(express.json())
+
 // This is the global middleware express 
 // It runs for every request
 // 'next' is used for passing to other middleware to move on further
