@@ -46,8 +46,18 @@ end to send those request
 ------------------------------------------------------------------------------------------
 Second video: Express Router & API Routes (Interact with database)
 ------------------------------------------------------------------------------------------
+
 GET : Gets all the documents from the database and send them all back in json format to the browser
 POST : Create a new documents into the database
 GET (id) : Get a single documents from the database
 DELETE (id) : Deletes a single document from the database
 PATCH (id) : Updates a single document into the database
+------------------------------------------------------------------------------------------
+Handle a POST or PATCH request we can't access
+the data from 'req' object we use middleware express.json()
+: app.use(express.json())
+
+------------------------------------------------------------------------------------------
+Third video: MongoDB Atlas & Mongoose
+------------------------------------------------------------------------------------------
+
