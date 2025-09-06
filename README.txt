@@ -61,3 +61,16 @@ the data from 'req' object we use middleware express.json()
 Third video: MongoDB Atlas & Mongoose
 ------------------------------------------------------------------------------------------
 
+I need to create a database at mongoDB atlas and then 
+copy the connection link from that.
+and i storing this link in environment variable called 
+as MONGO_URI
+
+also need to install mongoose
+: npm install mongoose
+
+For connectivity need to add in server.js
+
+Now i am putting listening port into database connectivity
+because util it will not connected to database i don't 
+want to listen the API request
