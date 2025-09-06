@@ -74,3 +74,89 @@ For connectivity need to add in server.js
 Now i am putting listening port into database connectivity
 because util it will not connected to database i don't 
 want to listen the API request
+
+------------------------------------------------------------------------------------------
+Fourth video: MongoDB Schemas
+------------------------------------------------------------------------------------------
+
+const mongoose = require('mongoose')
+
+Why: Mongoose is a library that helps interact with MongoDB using a simpler and more structured way.
+
+Use: It allows you to create schemas, models, and run queries easily without manually writing MongoDB commands.
+------------------------------------------------------------------------------------------
+
+const Schema = mongoose.Schema
+
+const workoutSchema = new Schema({
+    title: {
+        type: String,
+        required : true
+    },
+    reps: {
+        type: Number,
+        required: true
+    },
+    load: {
+        type: Number,
+        required :true
+    }
+},{timestamps: true})
+
+Why: MongoDB by default is “schema-less” (documents can have any shape).
+A schema enforces consistent structure so all workout documents have the same fields and types.
+
+Use:
+
+type: String/Number → Ensures only that type of data can be stored.
+
+required: true → Prevents saving documents with missing fields.
+
+timestamps: true → Automatically adds createdAt and updatedAt for tracking changes.
+------------------------------------------------------------------------------------------
+
+module.exports = mongoose.model('Workout',workoutSchema)
+
+Why: The model is a wrapper around the schema that connects it to a MongoDB collection.
+
+Use:
+
+Automatically creates a collection named workouts (pluralized form).
+
+Provides methods like .create(), .find(), .findById(), .updateOne(), .deleteOne() to interact with the database.
+------------------------------------------------------------------------------------------
+
+const Workout = require('../models/workoutModel')
+
+Why: We need the model in our route file to actually talk to the database.
+
+Use: This gives access to database operations for the workouts collection.
+------------------------------------------------------------------------------------------
+
+const {title, load, reps} = req.body
+
+Why: This extracts the data sent by the client in the request.
+
+Use: Makes it easy to pass this data directly to the .create() function.
+------------------------------------------------------------------------------------------
+
+const workout = await Workout.create({title,load,reps})
+
+Why: .create() is a shortcut to insert a new document into the database.
+
+Use:
+
+Automatically validates the data against the schema.
+
+Returns the newly created document (including _id, createdAt, updatedAt).
+------------------------------------------------------------------------------------------
+
+res.status(200).json(workout);
+
+Why: After successful creation, we must let the client know what happened.
+
+Use:
+
+Status 200 → means success.
+
+Sends the created document back, so the frontend knows what was stored.
